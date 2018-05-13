@@ -1,13 +1,13 @@
 package com.mkleo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.mkleo.S1工厂模式.产品.IProduct;
 import com.mkleo.S1工厂模式.CarFactory;
 import com.mkleo.S1工厂模式.产品.ChanganCar;
 import com.mkleo.S1工厂模式.产品.HongqiCar;
+import com.mkleo.S1工厂模式.产品.IProduct;
 import com.mkleo.S1工厂模式.产品.ZhongtaiCar;
 import com.mkleo.S2抽象工厂模式.TransporterFactory;
 import com.mkleo.S2抽象工厂模式.产品.AudiCar;
@@ -29,7 +29,6 @@ import com.mkleo.S8过滤器模式_标准模式.GalaxyS8;
 import com.mkleo.S8过滤器模式_标准模式.IPhone6;
 import com.mkleo.S8过滤器模式_标准模式.Xiaomi6;
 import com.mkleo.S8过滤器模式_标准模式.base.AbsCriterion;
-import com.mkleo.S8过滤器模式_标准模式.base.AbsCriterion1;
 import com.mkleo.S8过滤器模式_标准模式.base.Phone;
 import com.mkleo.S8过滤器模式_标准模式.base.WaterproofPhone;
 
@@ -182,13 +181,6 @@ public class DesignPatternActivity extends AppCompatActivity {
         for (Phone cPhone : criterion.execCriterion(phones)) {
             Log.d("Mkleo", "Name:" + cPhone.getPhoneName());
         }
-//
-//        AbsCriterion1<WaterproofPhone,Phone> criterion = new AbsCriterion1<WaterproofPhone,Phone>() {
-//        };
-//
-//        for (Phone cPhone : criterion.execCriterion(phones)) {
-//            Log.d("Mkleo", "Name:" + cPhone.getPhoneName());
-//        }
     }
 
 

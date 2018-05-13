@@ -38,14 +38,16 @@ public abstract class AbsCriterion<T> implements ICriterion<T> {
 
 
     private boolean isInstaceOf(Object o) {
-        try {
-            //通过反射获取对象实例
-            T t = (T) Class.forName(mCriterion.getName());
 
-            return true;
+        try {
+            if (o.getClass() == mCriterion ||
+                    o.getClass().getSuperclass() == mCriterion)
+                return true;
         } catch (Exception e) {
             return false;
         }
+
+        return false;
     }
 
 }
