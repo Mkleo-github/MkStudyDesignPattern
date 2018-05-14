@@ -31,6 +31,7 @@ import com.mkleo.S8过滤器模式_标准模式.Xiaomi6;
 import com.mkleo.S8过滤器模式_标准模式.base.AbsCriterion;
 import com.mkleo.S8过滤器模式_标准模式.base.Phone;
 import com.mkleo.S8过滤器模式_标准模式.base.WaterproofPhone;
+import com.mkleo.S9组合模式.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.原型模式();
 //        this.适配器模式();
 //        this.桥接模式();
-        this.过滤器模式();
+//        this.过滤器模式();
+        this.组合模式();
 
     }
 
@@ -181,6 +183,34 @@ public class DesignPatternActivity extends AppCompatActivity {
         for (Phone cPhone : criterion.execCriterion(phones)) {
             Log.d("Mkleo", "Name:" + cPhone.getPhoneName());
         }
+    }
+
+    void 组合模式() {
+        Node node_董事会 = new Node(1, "董事会", null);
+        Node node_总经办 = new Node(2, "总经办", node_董事会);
+        Node node_北京总部 = new Node(3, "北京总部", node_总经办);
+        Node node_上海分部 = new Node(4, "上海分部", node_总经办);
+        Node node_北京财务部 = new Node(5, "北京财务部", node_北京总部);
+        Node node_上海财务部 = new Node(6, "上海财务部", node_上海分部);
+        Node node_北京技术部 = new Node(7, "北京技术部", node_北京总部);
+        Node node_上海营销部 = new Node(8, "上海营销部", node_上海分部);
+
+        List<Node> nodes = new ArrayList();
+
+        nodes.add(node_董事会);
+        nodes.add(node_总经办);
+        nodes.add(node_北京总部);
+        nodes.add(node_上海分部);
+        nodes.add(node_北京财务部);
+        nodes.add(node_上海财务部);
+        nodes.add(node_北京技术部);
+        nodes.add(node_上海营销部);
+
+        for (Node node : nodes) {
+
+            Log.d("Mkleo", node.toString());
+        }
+
     }
 
 
