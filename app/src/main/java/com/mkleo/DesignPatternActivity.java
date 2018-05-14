@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.mkleo.S10装饰器模式.Clothes;
+import com.mkleo.S10装饰器模式.ClothesDecorator;
 import com.mkleo.S1工厂模式.CarFactory;
 import com.mkleo.S1工厂模式.产品.ChanganCar;
 import com.mkleo.S1工厂模式.产品.HongqiCar;
@@ -51,7 +53,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.适配器模式();
 //        this.桥接模式();
 //        this.过滤器模式();
-        this.组合模式();
+//        this.组合模式();
+        this.装饰器模式();
 
     }
 
@@ -152,6 +155,7 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     void 适配器模式() {
 
+
         Log.d("Mkleo", "适配器模式");
 
         MediaAdapter adapter = new MediaAdapter(AudioPlayer.class);
@@ -162,11 +166,15 @@ public class DesignPatternActivity extends AppCompatActivity {
     }
 
     void 桥接模式() {
+        Log.d("Mkleo", "桥接模式");
+
         TextView textView = new TextView();
         textView.display();
     }
 
     void 过滤器模式() {
+
+        Log.d("Mkleo", "过滤器模式");
 
         GalaxyS8 galaxyS8 = new GalaxyS8("112", "三星S8");
         IPhone6 iPhone6 = new IPhone6("113", "苹果6");
@@ -186,6 +194,8 @@ public class DesignPatternActivity extends AppCompatActivity {
     }
 
     void 组合模式() {
+        Log.d("Mkleo", "组合模式");
+
         Node node_董事会 = new Node(1, "董事会", null);
         Node node_总经办 = new Node(2, "总经办", node_董事会);
         Node node_北京总部 = new Node(3, "北京总部", node_总经办);
@@ -210,6 +220,19 @@ public class DesignPatternActivity extends AppCompatActivity {
 
             Log.d("Mkleo", node.toString());
         }
+
+    }
+
+    void 装饰器模式() {
+
+        Log.d("Mkleo", "装饰器模式");
+
+        //创建装饰器
+        Clothes clothes = new Clothes();
+        ClothesDecorator clothesDecorator1 = new ClothesDecorator(clothes, "衣服图案");
+        ClothesDecorator clothesDecorator2 = new ClothesDecorator(clothesDecorator1, "衣服口袋");
+        ClothesDecorator clothesDecorator3 = new ClothesDecorator(clothesDecorator2, "衣服商标");
+        clothesDecorator3.clip();
 
     }
 
