@@ -7,6 +7,7 @@ import android.util.Log;
 import com.mkleo.S10装饰器模式.Clothes;
 import com.mkleo.S10装饰器模式.ClothesDecorator;
 import com.mkleo.S11外观模式.Computer;
+import com.mkleo.S12享元模式.BitmapCache;
 import com.mkleo.S1工厂模式.CarFactory;
 import com.mkleo.S1工厂模式.产品.ChanganCar;
 import com.mkleo.S1工厂模式.产品.HongqiCar;
@@ -56,7 +57,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.过滤器模式();
 //        this.组合模式();
 //        this.装饰器模式();
-        this.外观模式();
+//        this.外观模式();
+        this.享元模式();
 
     }
 
@@ -238,12 +240,20 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     }
 
-    void 外观模式(){
+    void 外观模式() {
 
         Log.d("Mkleo", "外观模式");
         Computer computer = new Computer();
         computer.open();
         computer.close();
+
+    }
+
+    void 享元模式() {
+
+        Log.d("Mkleo", BitmapCache.getBitmap(BitmapCache.BitmapPool.BITMAP_DOG).toString());
+        Log.d("Mkleo", BitmapCache.getBitmap(BitmapCache.BitmapPool.BITMAP_BIRD).toString());
+        Log.d("Mkleo", BitmapCache.getBitmap(BitmapCache.BitmapPool.BITMAP_CAT).toString());
 
     }
 
