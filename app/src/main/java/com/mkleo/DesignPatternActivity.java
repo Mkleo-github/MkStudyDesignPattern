@@ -20,11 +20,15 @@ import com.mkleo.S15命令模式.CmdSleepComputer;
 import com.mkleo.S17迭代器模式.Iterator;
 import com.mkleo.S17迭代器模式.NameRepository;
 import com.mkleo.S18中介者模式.ChatUser;
+import com.mkleo.S19备忘录模式.Data;
+import com.mkleo.S19备忘录模式.MemoryCache;
 import com.mkleo.S1工厂模式.CarFactory;
 import com.mkleo.S1工厂模式.产品.ChanganCar;
 import com.mkleo.S1工厂模式.产品.HongqiCar;
 import com.mkleo.S1工厂模式.产品.IProduct;
 import com.mkleo.S1工厂模式.产品.ZhongtaiCar;
+import com.mkleo.S20观察者模式.IQQUser;
+import com.mkleo.S20观察者模式.QQSpace;
 import com.mkleo.S2抽象工厂模式.TransporterFactory;
 import com.mkleo.S2抽象工厂模式.产品.AudiCar;
 import com.mkleo.S2抽象工厂模式.产品.BMWCar;
@@ -75,7 +79,9 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.责任链模式();
 //        this.命令模式();
 //        this.迭代器模式();
-        this.中介者模式();
+//        this.中介者模式();
+//        this.备忘录模式();
+//        this.观察者模式();
 
     }
 
@@ -347,6 +353,64 @@ public class DesignPatternActivity extends AppCompatActivity {
         john.sendMsg("hello man!");
 
         robot.sendMsg("i am robot");
+
+    }
+
+    void 备忘录模式() {
+
+        Data data = new Data();
+        MemoryCache memoryCache = new MemoryCache();
+
+        data.setState("State 1");
+        data.setState("State 2");
+        memoryCache.addMemory(data.saveStateToMemory());
+        data.setState("State 3");
+        memoryCache.addMemory(data.saveStateToMemory());
+
+        data.setState("State 4");
+        Log.d("Mkleo", "当前状态:" + data.getState());
+
+        data.getStateByMemory(memoryCache.getMemory(0));
+        Log.d("Mkleo", "变更为初始保存状态:" + data.getState());
+
+        data.getStateByMemory(memoryCache.getMemory(memoryCache.theLastPosition()));
+        Log.d("Mkleo", "变更为最终保存状态:" + data.getState());
+    }
+
+    void 观察者模式(){
+
+        IQQUser mkleo = new IQQUser() {
+            @Override
+            public void onSpaceUpdate() {
+                Log.d("Mkleo", "Mkleo 接到QQ空间更新");
+            }
+        };
+
+        IQQUser lemon = new IQQUser() {
+            @Override
+            public void onSpaceUpdate() {
+                Log.d("Mkleo", "Lemon 接到QQ空间更新");
+            }
+        };
+
+
+        IQQUser admin = new IQQUser() {
+            @Override
+            public void onSpaceUpdate() {
+                Log.d("Mkleo", "Admin 接到QQ空间更新");
+            }
+        };
+
+        QQSpace qqSpace = new QQSpace();
+        qqSpace.subscribe(admin);
+        qqSpace.subscribe(lemon);
+        qqSpace.subscribe(mkleo);
+        qqSpace.updateSpace();
+        Log.d("Mkleo", "---- 过了一个小时 ----");
+        //有人取消了订阅
+        qqSpace.unSubscribe(admin);
+        qqSpace.updateSpace();
+
 
     }
 
