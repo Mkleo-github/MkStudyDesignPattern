@@ -9,12 +9,17 @@ import com.mkleo.S10装饰器模式.ClothesDecorator;
 import com.mkleo.S11外观模式.Computer;
 import com.mkleo.S12享元模式.BitmapCache;
 import com.mkleo.S13代理模式.ProxyPicture;
-import com.mkleo.S14责任链模式.例子1.Logger;
-import com.mkleo.S14责任链模式.例子1.LoggerLevel;
 import com.mkleo.S14责任链模式.例子2.Activity;
 import com.mkleo.S14责任链模式.例子2.OnTouchListener;
 import com.mkleo.S14责任链模式.例子2.View;
 import com.mkleo.S14责任链模式.例子2.ViewGroup;
+import com.mkleo.S15命令模式.CmdCloseComputer;
+import com.mkleo.S15命令模式.CmdExecutor;
+import com.mkleo.S15命令模式.CmdOpenComputer;
+import com.mkleo.S15命令模式.CmdSleepComputer;
+import com.mkleo.S17迭代器模式.Iterator;
+import com.mkleo.S17迭代器模式.NameRepository;
+import com.mkleo.S18中介者模式.ChatUser;
 import com.mkleo.S1工厂模式.CarFactory;
 import com.mkleo.S1工厂模式.产品.ChanganCar;
 import com.mkleo.S1工厂模式.产品.HongqiCar;
@@ -67,7 +72,10 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.外观模式();
 //        this.享元模式();
 //        this.代理模式();
-        this.责任链模式();
+//        this.责任链模式();
+//        this.命令模式();
+//        this.迭代器模式();
+        this.中介者模式();
 
     }
 
@@ -152,13 +160,13 @@ public class DesignPatternActivity extends AppCompatActivity {
 
         try {
             User user1 = UserCache.getUser(0);
-            Log.d("Mkleo", "User " + user1.getName());
+            Log.d("Mkleo", "ChatUser " + user1.getName());
 
             User user2 = UserCache.getUser(1);
-            Log.d("Mkleo", "User " + user2.getName());
+            Log.d("Mkleo", "ChatUser " + user2.getName());
 
             User user3 = UserCache.getUser(2);
-            Log.d("Mkleo", "User " + user3.getName());
+            Log.d("Mkleo", "ChatUser " + user3.getName());
 
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
@@ -287,15 +295,58 @@ public class DesignPatternActivity extends AppCompatActivity {
         activity.setSuperWindow(viewGroup);
         viewGroup.setSuperWindow(view);
 
-        view.setOnTouchListener(new OnTouchListener() {
+
+        viewGroup.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch() {
                 return true;
             }
         });
 
+        view.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch() {
+                return false;
+            }
+        });
+
         //模拟点击
         activity.dispatchTouch();
+    }
+
+    void 命令模式() {
+
+        com.mkleo.S15命令模式.Computer computer = new com.mkleo.S15命令模式.Computer();
+        CmdOpenComputer cmd1 = new CmdOpenComputer(computer);
+        CmdSleepComputer cmd2 = new CmdSleepComputer(computer);
+        CmdCloseComputer cmd3 = new CmdCloseComputer(computer);
+
+        CmdExecutor executor = new CmdExecutor();
+        executor.addCmd(cmd1);
+        executor.addCmd(cmd2);
+        executor.addCmd(cmd3);
+        executor.execute();
+    }
+
+    void 迭代器模式() {
+
+        NameRepository nameRepository = new NameRepository();
+        Iterator iterator = nameRepository.getIterator();
+        while (iterator.hasNext()) {
+            String name = (String) iterator.next();
+            Log.d("Mkleo", "Name:" + name);
+        }
+
+    }
+
+    void 中介者模式() {
+
+        ChatUser john = new ChatUser("john");
+        ChatUser robot = new ChatUser("robot");
+
+        john.sendMsg("hello man!");
+
+        robot.sendMsg("i am robot");
 
     }
 
