@@ -8,6 +8,13 @@ import com.mkleo.S10装饰器模式.Clothes;
 import com.mkleo.S10装饰器模式.ClothesDecorator;
 import com.mkleo.S11外观模式.Computer;
 import com.mkleo.S12享元模式.BitmapCache;
+import com.mkleo.S13代理模式.ProxyPicture;
+import com.mkleo.S14责任链模式.例子1.Logger;
+import com.mkleo.S14责任链模式.例子1.LoggerLevel;
+import com.mkleo.S14责任链模式.例子2.Activity;
+import com.mkleo.S14责任链模式.例子2.OnTouchListener;
+import com.mkleo.S14责任链模式.例子2.View;
+import com.mkleo.S14责任链模式.例子2.ViewGroup;
 import com.mkleo.S1工厂模式.CarFactory;
 import com.mkleo.S1工厂模式.产品.ChanganCar;
 import com.mkleo.S1工厂模式.产品.HongqiCar;
@@ -58,7 +65,9 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.组合模式();
 //        this.装饰器模式();
 //        this.外观模式();
-        this.享元模式();
+//        this.享元模式();
+//        this.代理模式();
+        this.责任链模式();
 
     }
 
@@ -257,5 +266,37 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     }
 
+    void 代理模式() {
+        ProxyPicture proxyPicture = new ProxyPicture("SB.jpg");
+        proxyPicture.display();
+        proxyPicture.display();
+    }
+
+
+    void 责任链模式() {
+
+//        Logger.logger(LoggerLevel.MAIN,"责任链模式 例子1");
+
+        //创建Activity
+        Activity activity = new Activity();
+        //创建ViewGroup
+        ViewGroup viewGroup = new ViewGroup();
+        //创建View
+        View view = new View();
+        //设置上层图形
+        activity.setSuperWindow(viewGroup);
+        viewGroup.setSuperWindow(view);
+
+        view.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch() {
+                return true;
+            }
+        });
+
+        //模拟点击
+        activity.dispatchTouch();
+
+    }
 
 }
