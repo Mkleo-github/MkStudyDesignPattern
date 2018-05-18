@@ -29,6 +29,10 @@ import com.mkleo.S1工厂模式.产品.IProduct;
 import com.mkleo.S1工厂模式.产品.ZhongtaiCar;
 import com.mkleo.S20观察者模式.IQQUser;
 import com.mkleo.S20观察者模式.QQSpace;
+import com.mkleo.S21状态模式.FreeState;
+import com.mkleo.S21状态模式.Player;
+import com.mkleo.S21状态模式.ReadyState;
+import com.mkleo.S22空对象模式.UserTable;
 import com.mkleo.S2抽象工厂模式.TransporterFactory;
 import com.mkleo.S2抽象工厂模式.产品.AudiCar;
 import com.mkleo.S2抽象工厂模式.产品.BMWCar;
@@ -82,6 +86,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.中介者模式();
 //        this.备忘录模式();
 //        this.观察者模式();
+//        this.状态模式();
+        this.空对象模式();
 
     }
 
@@ -273,6 +279,7 @@ public class DesignPatternActivity extends AppCompatActivity {
     }
 
     void 享元模式() {
+        Log.d("Mkleo", "享元模式");
 
         Log.d("Mkleo", BitmapCache.getBitmap(BitmapCache.BitmapPool.BITMAP_DOG).toString());
         Log.d("Mkleo", BitmapCache.getBitmap(BitmapCache.BitmapPool.BITMAP_BIRD).toString());
@@ -281,6 +288,8 @@ public class DesignPatternActivity extends AppCompatActivity {
     }
 
     void 代理模式() {
+        Log.d("Mkleo", "代理模式");
+
         ProxyPicture proxyPicture = new ProxyPicture("SB.jpg");
         proxyPicture.display();
         proxyPicture.display();
@@ -289,6 +298,7 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     void 责任链模式() {
 
+        Log.d("Mkleo", "责任链模式");
 //        Logger.logger(LoggerLevel.MAIN,"责任链模式 例子1");
 
         //创建Activity
@@ -322,6 +332,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     void 命令模式() {
 
+        Log.d("Mkleo", "命令模式");
+
         com.mkleo.S15命令模式.Computer computer = new com.mkleo.S15命令模式.Computer();
         CmdOpenComputer cmd1 = new CmdOpenComputer(computer);
         CmdSleepComputer cmd2 = new CmdSleepComputer(computer);
@@ -336,6 +348,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     void 迭代器模式() {
 
+        Log.d("Mkleo", "迭代器模式");
+
         NameRepository nameRepository = new NameRepository();
         Iterator iterator = nameRepository.getIterator();
         while (iterator.hasNext()) {
@@ -347,6 +361,8 @@ public class DesignPatternActivity extends AppCompatActivity {
 
     void 中介者模式() {
 
+        Log.d("Mkleo", "中介者模式");
+
         ChatUser john = new ChatUser("john");
         ChatUser robot = new ChatUser("robot");
 
@@ -357,6 +373,8 @@ public class DesignPatternActivity extends AppCompatActivity {
     }
 
     void 备忘录模式() {
+
+        Log.d("Mkleo", "备忘录模式");
 
         Data data = new Data();
         MemoryCache memoryCache = new MemoryCache();
@@ -377,7 +395,9 @@ public class DesignPatternActivity extends AppCompatActivity {
         Log.d("Mkleo", "变更为最终保存状态:" + data.getState());
     }
 
-    void 观察者模式(){
+    void 观察者模式() {
+
+        Log.d("Mkleo", "观察者模式");
 
         IQQUser mkleo = new IQQUser() {
             @Override
@@ -392,7 +412,6 @@ public class DesignPatternActivity extends AppCompatActivity {
                 Log.d("Mkleo", "Lemon 接到QQ空间更新");
             }
         };
-
 
         IQQUser admin = new IQQUser() {
             @Override
@@ -413,5 +432,30 @@ public class DesignPatternActivity extends AppCompatActivity {
 
 
     }
+
+    void 状态模式() {
+        Log.d("Mkleo", "状态模式");
+
+        Player player = new Player();
+
+        FreeState freeState = new FreeState();
+        freeState.action(player);
+
+        ReadyState readyState = new ReadyState();
+        readyState.action(player);
+    }
+
+    void 空对象模式() {
+
+        com.mkleo.S22空对象模式.User user = UserTable.getUser("Jimi");
+
+        Log.d("Mkleo", user.getUserName());
+
+        com.mkleo.S22空对象模式.User user2 = UserTable.getUser("jimi");
+
+        Log.d("Mkleo", user2.getUserName());
+
+    }
+
 
 }
