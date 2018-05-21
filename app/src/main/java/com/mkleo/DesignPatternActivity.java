@@ -33,6 +33,13 @@ import com.mkleo.S21状态模式.FreeState;
 import com.mkleo.S21状态模式.Player;
 import com.mkleo.S21状态模式.ReadyState;
 import com.mkleo.S22空对象模式.UserTable;
+import com.mkleo.S23策略模式.AdditionStrategy;
+import com.mkleo.S23策略模式.SpellStrategy;
+import com.mkleo.S24模版模式.QQCar;
+import com.mkleo.S25访问者模式.Keyboard;
+import com.mkleo.S25访问者模式.Mouse;
+import com.mkleo.S25访问者模式.MyComputer;
+import com.mkleo.S25访问者模式.SoundBox;
 import com.mkleo.S2抽象工厂模式.TransporterFactory;
 import com.mkleo.S2抽象工厂模式.产品.AudiCar;
 import com.mkleo.S2抽象工厂模式.产品.BMWCar;
@@ -87,7 +94,10 @@ public class DesignPatternActivity extends AppCompatActivity {
 //        this.备忘录模式();
 //        this.观察者模式();
 //        this.状态模式();
-        this.空对象模式();
+//        this.空对象模式();
+//        this.策略模式();
+//        this.模版模式();
+//        this.访问者模式();
 
     }
 
@@ -455,6 +465,32 @@ public class DesignPatternActivity extends AppCompatActivity {
 
         Log.d("Mkleo", user2.getUserName());
 
+    }
+
+    void 策略模式() {
+
+        AdditionStrategy additionStrategy = new AdditionStrategy();
+        int sum1 = additionStrategy.execStrategy(1, 2, 3, 4, 5, 6);
+        int sum2 = additionStrategy.execStrategy(2, 1, 31, 51, 12);
+        Log.d("Mkleo", "sum1:" + sum1 + "  sum2:" + sum2);
+
+        SpellStrategy spellStrategy = new SpellStrategy();
+        String result = spellStrategy.execStrategy("S", "A", "M", "N");
+        Log.d("Mkleo", "result:" + result);
+
+    }
+
+    void 模版模式() {
+
+        QQCar qqCar = new QQCar();
+        qqCar.drive();
+    }
+
+    void 访问者模式(){
+
+        MyComputer myComputer = new MyComputer();
+        myComputer.addPeripherals(new Mouse(),new Keyboard(),new SoundBox());
+        myComputer.open();
     }
 
 
